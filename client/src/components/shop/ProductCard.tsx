@@ -1,7 +1,8 @@
-import { Box, Card, CardContent, CardMedia, Typography, Button, IconButton, Chip } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, IconButton, Chip } from '@mui/material';
 import { ShoppingCart, Eye, Heart, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAddToCartMutation } from '../../store/api/cartApi';
+import { PantryButton } from '../ui/PantryButton';
 import { useDispatch } from 'react-redux';
 // import { toast } from 'react-hot-toast'; // Assuming toast exists or will use alert for now
 
@@ -121,17 +122,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
                     display: 'flex',
                     justifyContent: 'center'
                 }}>
-                    <Button
-                        variant="contained"
-                        color="secondary"
+                    <PantryButton
+                        variant="primary"
                         fullWidth
                         startIcon={isAdding ? <Loader2 className="animate-spin" size={18} /> : <ShoppingCart size={18} />}
-                        sx={{ borderRadius: 2 }}
+                        sx={{ 
+                            borderRadius: '24px',
+                            bgcolor: 'var(--pantry-green-600)',
+                            color: 'white !important',
+                            fontWeight: 800,
+                            py: 1,
+                            boxShadow: '0 4px 12px rgba(46,125,50,0.2)',
+                            '&:hover': {
+                                bgcolor: 'var(--pantry-green-800)',
+                                boxShadow: '0 4px 12px rgba(46,125,50,0.3)'
+                            }
+                        }}
                         onClick={handleAddToCart}
                         disabled={isAdding}
                     >
                         {isAdding ? 'Adding...' : 'Add to Cart'}
-                    </Button>
+                    </PantryButton>
                 </Box>
             </Box>
 

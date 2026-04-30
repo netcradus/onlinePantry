@@ -22,7 +22,8 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post('/api/v1/auth/login', { email, password });
+            const baseUrl = import.meta.env.VITE_API_URL || '';
+            const response = await axios.post(`${baseUrl}/api/v1/auth/login`, { email, password });
             const { user, accessToken } = response.data.data;
 
             if (user.role !== 'admin' && user.role !== 'vendor') {

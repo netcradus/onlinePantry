@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, IconButton, Chip, Stack, Button } from '@mui/material';
-import { Plus, Heart, Star } from 'lucide-react';
+import { Card, CardContent, CardMedia, Typography, Box, IconButton, Chip, Stack } from '@mui/material';
+import { Plus, Heart, Star, ShoppingCart } from 'lucide-react';
 import { PantryButton } from './PantryButton';
 import { ProducePlaceholder } from './ProducePlaceholder';
 
@@ -125,19 +125,19 @@ export const PantryCard: React.FC<PantryCardProps> = ({
                     )}
                 </Box>
 
-                <Button 
+                <PantryButton 
                     fullWidth
-                    variant="contained" 
+                    variant="primary" 
                     onClick={(e) => {
                         e.stopPropagation();
                         onAddToCart();
                     }}
                     sx={{ 
                         bgcolor: 'var(--pantry-green-600)', 
-                        color: 'white',
+                        color: 'white !important',
                         borderRadius: '24px',
                         textTransform: 'none',
-                        fontWeight: 600,
+                        fontWeight: 800,
                         py: 1,
                         '&:hover': {
                             bgcolor: 'var(--pantry-green-800)',
@@ -146,7 +146,7 @@ export const PantryCard: React.FC<PantryCardProps> = ({
                     }}
                 >
                     Add to cart
-                </Button>
+                </PantryButton>
             </CardContent>
         </Card>
     );
