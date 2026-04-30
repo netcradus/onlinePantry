@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, IconButton, Chip, Stack } from '@mui/material';
-import { Plus, Heart, Star, ShoppingCart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Card, CardContent, CardMedia, Typography, Box, IconButton, Chip, Stack, Button } from '@mui/material';
+import { Plus, Heart, Star, ShoppingCart, Loader2 } from 'lucide-react';
 import { PantryButton } from './PantryButton';
 import { ProducePlaceholder } from './ProducePlaceholder';
 
@@ -26,7 +26,15 @@ export const PantryCard: React.FC<PantryCardProps> = ({
     onAddToCart,
     isOrganic = true,
 }) => {
+    const [isAdding, setIsAdding] = useState(false);
     const hasDiscount = discountPrice && discountPrice < price;
+
+    const handleAddToCart = async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setIsAdding(true);
+        await onAddToCart();
+        setIsAdding(false);
+    };
 
     return (
         <Card 
@@ -125,28 +133,29 @@ export const PantryCard: React.FC<PantryCardProps> = ({
                     )}
                 </Box>
 
-                <PantryButton 
+                <Button
+                    variant="contained"
                     fullWidth
-                    variant="primary" 
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onAddToCart();
-                    }}
+                    startIcon={isAdding ? <Loader2 className="animate-spin" size={18} /> : <ShoppingCart size={18} />}
                     sx={{ 
-                        bgcolor: 'var(--pantry-green-600)', 
-                        color: 'white !important',
                         borderRadius: '24px',
-                        textTransform: 'none',
+                        bgcolor: '#2e7d32 !important',
+                        color: '#ffffff !important',
                         fontWeight: 800,
-                        py: 1,
+                        fontSize: '12px',
+                        py: 1.2,
+                        textTransform: 'uppercase',
+                        boxShadow: '0 4px 12px rgba(46,125,50,0.2)',
                         '&:hover': {
-                            bgcolor: 'var(--pantry-green-800)',
-                            boxShadow: '0 4px 12px rgba(46,125,50,0.3)'
+                            bgcolor: '#1b5e20 !important',
+                            boxShadow: '0 6px 16px rgba(46,125,50,0.3)'
                         }
                     }}
+                    onClick={handleAddToCart}
+                    disabled={isAdding}
                 >
-                    Add to cart
-                </PantryButton>
+                    {isAdding ? 'Adding...' : 'Add to Cart'}
+                </Button>
             </CardContent>
         </Card>
     );

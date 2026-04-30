@@ -122,27 +122,29 @@ const ProductCard = ({ product }: ProductCardProps) => {
                     display: 'flex',
                     justifyContent: 'center'
                 }}>
-                    <PantryButton
-                        variant="primary"
+                    <Button
+                        variant="contained"
                         fullWidth
                         startIcon={isAdding ? <Loader2 className="animate-spin" size={18} /> : <ShoppingCart size={18} />}
                         sx={{ 
                             borderRadius: '24px',
-                            bgcolor: 'var(--pantry-green-600)',
-                            color: 'white !important',
+                            bgcolor: '#2e7d32 !important',
+                            color: '#ffffff !important',
                             fontWeight: 800,
-                            py: 1,
+                            fontSize: '12px',
+                            py: 1.2,
+                            textTransform: 'uppercase',
                             boxShadow: '0 4px 12px rgba(46,125,50,0.2)',
                             '&:hover': {
-                                bgcolor: 'var(--pantry-green-800)',
-                                boxShadow: '0 4px 12px rgba(46,125,50,0.3)'
+                                bgcolor: '#1b5e20 !important',
+                                boxShadow: '0 6px 16px rgba(46,125,50,0.3)'
                             }
                         }}
                         onClick={handleAddToCart}
                         disabled={isAdding}
                     >
                         {isAdding ? 'Adding...' : 'Add to Cart'}
-                    </PantryButton>
+                    </Button>
                 </Box>
             </Box>
 

@@ -23,7 +23,11 @@ const Login = () => {
 
         try {
             const baseUrl = import.meta.env.VITE_API_URL || '';
-            const response = await axios.post(`${baseUrl}/api/v1/auth/login`, { email, password });
+            const loginUrl = baseUrl.includes('/api/v1') 
+                ? `${baseUrl}/auth/login` 
+                : `${baseUrl}/api/v1/auth/login`;
+                
+            const response = await axios.post(loginUrl, { email, password });
             const { user, accessToken } = response.data.data;
 
             if (user.role !== 'admin' && user.role !== 'vendor') {
