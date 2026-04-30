@@ -89,7 +89,6 @@ const recipeSchema = new Schema(
     }
 );
 
-recipeSchema.index({ slug: 1 });
 recipeSchema.index({ tags: 1 });
 
 export const Recipe = mongoose.models.Recipe || mongoose.model("Recipe", recipeSchema);

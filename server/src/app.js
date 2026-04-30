@@ -43,6 +43,15 @@ app.use(cookieParser());
 // Logging
 app.use(morgan("dev"));
 
+app.get("/", (req, res) => {
+    res.status(200).json({ 
+        status: "success", 
+        message: "Welcome to Online Pantry API",
+        version: "1.0.0",
+        environment: env.NODE_ENV
+    });
+});
+
 // Health Check
 app.get("/api/v1/health", (req, res) => {
     res.status(200).json({ status: "OK", message: "Server is healthy" });

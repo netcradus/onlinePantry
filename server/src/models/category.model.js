@@ -40,6 +40,5 @@ const categorySchema = new Schema(
 
 // Index for hierarchical queries and slug lookups
 categorySchema.index({ parentId: 1 });
-categorySchema.index({ slug: 1 });
 
 export const Category = mongoose.models.Category || mongoose.model("Category", categorySchema);

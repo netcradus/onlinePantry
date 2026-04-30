@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, CircularProgress, IconButton, Stack } from '@mui/material';
+import { Box, Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent, DialogActions, TextField, MenuItem, CircularProgress, IconButton, Stack, Chip } from '@mui/material';
 import { useGetSlotsQuery, useCreateSlotMutation, useUpdateSlotMutation } from '../../store/api/slotsApi';
 import { PantryButton } from '../../components/ui/PantryButton';
 import { PantryBadge } from '../../components/ui/PantryBadge';
