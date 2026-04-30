@@ -29,8 +29,9 @@ app.use(compression()); // Gzip compression
 app.use(limiter); // Apply global rate limiting
 app.use(
     cors({
-        origin: env.CORS_ORIGIN,
+        origin: [env.CORS_ORIGIN, "https://online-pantry.vercel.app", "http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
         credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     })
 );
 
