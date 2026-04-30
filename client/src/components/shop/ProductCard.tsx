@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Typography, IconButton, Chip } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, IconButton, Chip, Button } from '@mui/material';
 import { ShoppingCart, Eye, Heart, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAddToCartMutation } from '../../store/api/cartApi';

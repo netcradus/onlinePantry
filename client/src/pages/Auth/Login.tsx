@@ -22,7 +22,10 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const baseUrl = import.meta.env.VITE_API_URL || '';
+            let baseUrl = import.meta.env.VITE_API_URL || '';
+            // Remove trailing slash if present
+            if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+            
             const loginUrl = baseUrl.includes('/api/v1') 
                 ? `${baseUrl}/auth/login` 
                 : `${baseUrl}/api/v1/auth/login`;
