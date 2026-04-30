@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./server
+      target: runner
+    # Restart policy for production
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    env_file:
+      - ./server/.env.production
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./client
+      target: runner
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
