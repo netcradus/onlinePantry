@@ -1,12 +1,17 @@
 
 import { api } from './api';
 
+// Cast helper – needed because injectEndpoints returns a new type,
+// but the base `api` object used inside the same call doesn't know
+// about 'getCart' yet, causing TS2345 / "never" errors.
+const patchCart = (dispatch: any, recipe: (draft: any) => void) =>
+    dispatch((api as any).util.updateQueryData('getCart', undefined, recipe));
+
 export const cartApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getCart: builder.query({
             query: () => '/cart',
             providesTags: ['Cart'],
-            // Keep the cached result for 60 seconds after the component unmounts
             keepUnusedDataFor: 60,
         }),
 
@@ -16,33 +21,24 @@ export const cartApi = api.injectEndpoints({
                 method: 'POST',
                 body: { productId, quantity },
             }),
-            // Optimistic update: increment item count immediately, refetch on error
             async onQueryStarted({ productId, quantity }, { dispatch, queryFulfilled }) {
-                const patchResult = dispatch(
-                    api.util.updateQueryData('getCart', undefined, (draft) => {
-                        if (!draft?.data) return;
-                        const existing = draft.data.items?.find(
-                            (item: any) => item.product?._id === productId || item.product === productId
-                        );
-                        if (existing) {
-                            existing.quantity += quantity;
-                        } else {
-                            // Push a minimal placeholder; full data arrives on invalidation
-                            draft.data.items = draft.data.items || [];
-                            draft.data.items.push({
-                                product: { _id: productId },
-                                quantity,
-                                price: 0,
-                                name: '',
-                                image: '',
-                            });
-                        }
-                    })
-                );
+                const patch = patchCart(dispatch, (draft: any) => {
+                    if (!draft?.data) return;
+                    const items: any[] = draft.data.items ?? [];
+                    const existing = items.find(
+                        (i: any) => i.product?._id === productId || i.product === productId
+                    );
+                    if (existing) {
+                        existing.quantity += quantity;
+                    } else {
+                        items.push({ product: { _id: productId }, quantity, price: 0, name: '', image: '' });
+                        draft.data.items = items;
+                    }
+                });
                 try {
                     await queryFulfilled;
                 } catch {
-                    patchResult.undo();
+                    patch.undo();
                 }
             },
             invalidatesTags: ['Cart'],
@@ -53,20 +49,17 @@ export const cartApi = api.injectEndpoints({
                 url: `/cart/${productId}`,
                 method: 'DELETE',
             }),
-            // Optimistic update: remove immediately
             async onQueryStarted(productId, { dispatch, queryFulfilled }) {
-                const patchResult = dispatch(
-                    api.util.updateQueryData('getCart', undefined, (draft) => {
-                        if (!draft?.data?.items) return;
-                        draft.data.items = draft.data.items.filter(
-                            (item: any) => item.product?._id !== productId && item.product !== productId
-                        );
-                    })
-                );
+                const patch = patchCart(dispatch, (draft: any) => {
+                    if (!draft?.data?.items) return;
+                    draft.data.items = draft.data.items.filter(
+                        (i: any) => i.product?._id !== productId && i.product !== productId
+                    );
+                });
                 try {
                     await queryFulfilled;
                 } catch {
-                    patchResult.undo();
+                    patch.undo();
                 }
             },
             invalidatesTags: ['Cart'],
@@ -78,29 +71,24 @@ export const cartApi = api.injectEndpoints({
                 method: 'PATCH',
                 body: { productId, quantity },
             }),
-            // Optimistic update: change quantity immediately
             async onQueryStarted({ productId, quantity }, { dispatch, queryFulfilled }) {
-                const patchResult = dispatch(
-                    api.util.updateQueryData('getCart', undefined, (draft) => {
-                        if (!draft?.data?.items) return;
+                const patch = patchCart(dispatch, (draft: any) => {
+                    if (!draft?.data?.items) return;
+                    if (quantity <= 0) {
+                        draft.data.items = draft.data.items.filter(
+                            (i: any) => i.product?._id !== productId && i.product !== productId
+                        );
+                    } else {
                         const item = draft.data.items.find(
                             (i: any) => i.product?._id === productId || i.product === productId
                         );
-                        if (item) {
-                            if (quantity <= 0) {
-                                draft.data.items = draft.data.items.filter(
-                                    (i: any) => i.product?._id !== productId && i.product !== productId
-                                );
-                            } else {
-                                item.quantity = quantity;
-                            }
-                        }
-                    })
-                );
+                        if (item) item.quantity = quantity;
+                    }
+                });
                 try {
                     await queryFulfilled;
                 } catch {
-                    patchResult.undo();
+                    patch.undo();
                 }
             },
             invalidatesTags: ['Cart'],
