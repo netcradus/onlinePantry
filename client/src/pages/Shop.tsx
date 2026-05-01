@@ -171,7 +171,7 @@ const Shop = () => {
                             </Box>
                         </Paper>
 
-                        {isLoading || isFetching ? (
+                        {isLoading ? (
                             <Grid container spacing={3}>
                                 {[...Array(8)].map((_, i) => (
                                     <Grid item xs={6} sm={4} lg={3} key={i}>
@@ -181,23 +181,33 @@ const Shop = () => {
                             </Grid>
                         ) : (
                             <>
-                                <Grid container spacing={3}>
-                                    {products.map((product: any) => (
-                                        <Grid item xs={6} sm={4} lg={3} key={product._id}>
-                                            <PantryCard
-                                                id={product._id}
-                                                name={product.name}
-                                                brand={product.brand}
-                                                price={product.price}
-                                                discountPrice={product.discountPrice}
-                                                weight={product.weight}
-                                                image={product.images?.[0]}
-                                                isOrganic={product.isOrganic}
-                                                onAddToCart={() => handleAddToCart(product._id)}
-                                            />
-                                        </Grid>
-                                    ))}
-                                </Grid>
+                                <Box sx={{ position: 'relative' }}>
+                                    {isFetching && (
+                                        <Box sx={{
+                                            position: 'absolute', top: 0, left: 0, right: 0,
+                                            display: 'flex', justifyContent: 'flex-end', p: 1, zIndex: 2
+                                        }}>
+                                            <CircularProgress size={20} thickness={5} sx={{ color: 'var(--pantry-green-600)' }} />
+                                        </Box>
+                                    )}
+                                    <Grid container spacing={3} sx={{ opacity: isFetching ? 0.55 : 1, transition: 'opacity 0.25s ease' }}>
+                                        {products.map((product: any) => (
+                                            <Grid item xs={6} sm={4} lg={3} key={product._id}>
+                                                <PantryCard
+                                                    id={product._id}
+                                                    name={product.name}
+                                                    brand={product.brand}
+                                                    price={product.price}
+                                                    discountPrice={product.discountPrice}
+                                                    weight={product.weight}
+                                                    image={product.images?.[0]}
+                                                    isOrganic={product.isOrganic}
+                                                    onAddToCart={() => handleAddToCart(product._id)}
+                                                />
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </Box>
 
                                 {products.length === 0 && (
                                     <Paper sx={{ p: 10, textAlign: 'center', borderRadius: '16px', bgcolor: 'white' }}>

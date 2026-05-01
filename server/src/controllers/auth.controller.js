@@ -195,7 +195,7 @@ export const sendOTP = asyncHandler(async (req, res) => {
         try {
             const client = twilio(env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN);
             await client.messages.create({
-                body: `Your Rhichik Ayurveda verification code is: ${otp}`,
+                body: `Your OnlinePantry verification code is: ${otp}`,
                 from: env.TWILIO_PHONE_NUMBER,
                 to: phone,
             });

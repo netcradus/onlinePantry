@@ -120,15 +120,15 @@ export const PantryCard: React.FC<PantryCardProps> = ({
                     {hasDiscount ? (
                         <>
                             <Typography sx={{ fontWeight: 700, color: 'var(--pantry-sale)', fontSize: '1.1rem' }}>
-                                ₹{discountPrice}
+                                £{discountPrice}
                             </Typography>
                             <Typography sx={{ textDecoration: 'line-through', color: 'var(--pantry-gray-400)', fontSize: '0.85rem' }}>
-                                ₹{price}
+                                £{price}
                             </Typography>
                         </>
                     ) : (
                         <Typography sx={{ fontWeight: 700, color: 'var(--pantry-green-600)', fontSize: '1.1rem' }}>
-                            ₹{price}
+                            £{price}
                         </Typography>
                     )}
                 </Box>

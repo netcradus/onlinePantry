@@ -5,7 +5,7 @@ import './styles/global.css'
 import { Provider } from 'react-redux'
 import { store } from '@/store/store'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider, CssBaseline } from '@mui/material'
 import { theme } from '@/styles/theme'
 
 import { SocketProvider } from './context/SocketContext'
@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
             <SocketProvider>
                 <ThemeProvider theme={theme}>
+                    <CssBaseline />
                     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                         <App />
                     </BrowserRouter>

@@ -1,5 +1,5 @@
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
-import { Target, Eye, Heart } from 'lucide-react';
+import { Target, Eye, Heart, ShoppingBag, ShieldCheck, Leaf } from 'lucide-react';
 
 const AboutSection = () => {
     return (
@@ -8,13 +8,13 @@ const AboutSection = () => {
                 <Grid container spacing={6} alignItems="center">
                     <Grid item xs={12} md={6}>
                         <Typography variant="overline" color="secondary" fontWeight={700} sx={{ letterSpacing: 2 }}>
-                            ABOUT US
+                            ABOUT ONLINEPANTRY
                         </Typography>
                         <Typography variant="h3" sx={{ fontWeight: 700, mb: 3, color: 'primary.main' }}>
-                            Restoring Health Through Nature
+                            Freshness Delivered, <br/>Quality Guaranteed
                         </Typography>
                         <Typography variant="body1" paragraph sx={{ fontSize: '1.1rem', color: 'text.secondary' }}>
-                            Rhichik Ayurveda was established with the mission of providing natural, root-cause-based healing using time-tested Ayurvedic principles.
+                            OnlinePantry was founded in the heart of London with a simple mission: to bring the freshest, highest-quality groceries directly from local farms and trusted suppliers to your doorstep.
                         </Typography>
 
                         <Box sx={{ mt: 4 }}>
@@ -24,7 +24,7 @@ const AboutSection = () => {
                                     <Typography variant="h6" fontWeight={700}>Our Mission</Typography>
                                 </Box>
                                 <Typography variant="body2" color="text.secondary" sx={{ ml: 4.5 }}>
-                                    To deliver authentic Ayurvedic care, educate people about preventive healthcare, and promote natural healing without chemicals.
+                                    To provide a seamless, sustainable, and premium grocery shopping experience that saves time and promotes a healthier lifestyle.
                                 </Typography>
                             </Box>
 
@@ -34,7 +34,7 @@ const AboutSection = () => {
                                     <Typography variant="h6" fontWeight={700}>Our Vision</Typography>
                                 </Box>
                                 <Typography variant="body2" color="text.secondary" sx={{ ml: 4.5 }}>
-                                    To become a leading Ayurvedic healthcare provider promoting disease-free and balanced living.
+                                    To be the UK's most trusted and sustainable online grocery platform, championing local producers and organic farming.
                                 </Typography>
                             </Box>
 
@@ -44,7 +44,7 @@ const AboutSection = () => {
                                     <Typography variant="h6" fontWeight={700}>Our Values</Typography>
                                 </Box>
                                 <Typography variant="body2" color="text.secondary" sx={{ ml: 4.5 }}>
-                                    Authenticity • Compassion • Integrity • Patient-Centered Care
+                                    Quality First • Sustainability • Community Support • Unmatched Convenience
                                 </Typography>
                             </Box>
                         </Box>
@@ -58,22 +58,25 @@ const AboutSection = () => {
                             textAlign: 'center'
                         }}>
                             <Typography variant="h5" fontWeight={700} sx={{ mb: 3, color: 'darkgreen' }}>
-                                Certifications
+                                Our Commitments
                             </Typography>
                             <Grid container spacing={2} justifyContent="center">
                                 <Grid item xs={6}>
-                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2 }}>
-                                        <Typography fontWeight={600}>AYUSH Registered</Typography>
+                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                                        <Leaf color="var(--pantry-green-600)" />
+                                        <Typography fontWeight={600} fontSize="0.9rem">100% Organic Options</Typography>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2 }}>
-                                        <Typography fontWeight={600}>GMP Certified</Typography>
+                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                                        <ShieldCheck color="var(--pantry-green-600)" />
+                                        <Typography fontWeight={600} fontSize="0.9rem">Quality Tested</Typography>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2 }}>
-                                        <Typography fontWeight={600}>ISO Certified</Typography>
+                                    <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                                        <ShoppingBag color="var(--pantry-green-600)" />
+                                        <Typography fontWeight={600} fontSize="0.9rem">Sustainable Packaging</Typography>
                                     </Box>
                                 </Grid>
                             </Grid>

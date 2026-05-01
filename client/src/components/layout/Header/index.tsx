@@ -66,7 +66,7 @@ const Header = () => {
                     <Container maxWidth="xl">
                         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                             <Typography sx={{ fontWeight: 600, fontSize: '13px', textAlign: 'center' }}>
-                                🚛 Free delivery on orders above ₹499 — Use code <Box component="span" sx={{ fontWeight: 800 }}>FRESH10</Box> for 10% off
+                                🚛 Free delivery on orders above $15 — Use code <Box component="span" sx={{ fontWeight: 800 }}>FRESH10</Box> for 10% off
                             </Typography>
                         </Stack>
                     </Container>
@@ -147,10 +147,30 @@ const Header = () => {
                             </IconButton>
 
                             {isAuthenticated ? (
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer' }} onClick={handleMenu}>
-                                    <Avatar sx={{ width: 36, height: 36, bgcolor: 'var(--pantry-green-600)', fontWeight: 700, fontSize: '0.9rem' }}>
+                                <Box 
+                                    sx={{ 
+                                        display: 'flex', 
+                                        alignItems: 'center', 
+                                        gap: 1.5, 
+                                        cursor: 'pointer',
+                                        bgcolor: 'var(--pantry-gray-100)',
+                                        px: 1.5,
+                                        py: 0.75,
+                                        borderRadius: '30px',
+                                        transition: '0.2s',
+                                        '&:hover': { bgcolor: 'var(--pantry-gray-200)' }
+                                    }} 
+                                    onClick={handleMenu}
+                                >
+                                    <Avatar sx={{ width: 32, height: 32, bgcolor: 'var(--pantry-green-600)', fontWeight: 700, fontSize: '0.8rem' }}>
                                         {user?.firstName?.charAt(0)}
                                     </Avatar>
+                                    <Typography sx={{ fontWeight: 700, fontSize: '14px', display: { xs: 'none', sm: 'block' } }}>
+                                        {user?.firstName}
+                                    </Typography>
+                                    <Box component="span" sx={{ display: 'flex', alignItems: 'center', ml: -0.5 }}>
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                                    </Box>
                                 </Box>
                             ) : (
                                 <PantryButton 

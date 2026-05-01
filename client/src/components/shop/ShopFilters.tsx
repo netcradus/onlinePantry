@@ -40,7 +40,7 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({ filters, setFilters }) => {
             q: filters.q || '',
             category: '',
             min: 0,
-            max: 2000,
+            max: 100,
             sort: 'relevance',
             dietary: []
         });
@@ -77,7 +77,7 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({ filters, setFilters }) => {
                                     checked={filters.category === cat.slug}
                                     onChange={() => handleCategoryChange(cat.slug)}
                                     sx={{ color: '#e2e8f0', '&.Mui-checked': { color: 'primary.main' } }}
-                                />
+                                 />
                             }
                             label={<Typography sx={{ fontSize: '0.95rem', fontWeight: filters.category === cat.slug ? 700 : 500 }}>{cat.name}</Typography>}
                         />
@@ -92,11 +92,11 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({ filters, setFilters }) => {
                 <Typography variant="subtitle1" sx={{ fontWeight: 800, mb: 3, color: 'text.primary' }}>Price Range</Typography>
                 <Box sx={{ px: 1 }}>
                     <Slider
-                        value={[Number(filters.min) || 0, Number(filters.max) || 2000]}
+                        value={[Number(filters.min) || 0, Number(filters.max) || 100]}
                         onChange={handlePriceChange}
                         valueLabelDisplay="auto"
                         min={0}
-                        max={2000}
+                        max={100}
                         size="medium"
                         sx={{
                             color: 'primary.main',
@@ -112,8 +112,8 @@ const ShopFilters: React.FC<ShopFiltersProps> = ({ filters, setFilters }) => {
                         }}
                     />
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-                        <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: 'text.secondary' }}>₹{filters.min || 0}</Typography>
-                        <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: 'text.secondary' }}>₹{filters.max || 2000}</Typography>
+                        <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: 'text.secondary' }}>£{filters.min || 0}</Typography>
+                        <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: 'text.secondary' }}>£{filters.max || 100}</Typography>
                     </Box>
                 </Box>
             </Box>

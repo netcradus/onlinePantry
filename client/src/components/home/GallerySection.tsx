@@ -2,32 +2,32 @@ import { Box, Container, Typography, ImageList, ImageListItem } from '@mui/mater
 
 const itemData = [
     {
-        img: 'https://images.unsplash.com/photo-1540429235282-eeb7a49938c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=737&q=80',
-        title: 'Therapy Room',
+        img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80',
+        title: 'Fresh Produce',
         rows: 2,
         cols: 2,
     },
     {
-        img: 'https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-        title: 'Consultation',
+        img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800&q=80',
+        title: 'Local Farm',
     },
     {
-        img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-        title: 'Herbs Preparation',
+        img: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=800&q=80',
+        title: 'Organic Selection',
     },
     {
-        img: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-        title: 'Products',
+        img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
+        title: 'Premium Goods',
         cols: 2,
     },
     {
-        img: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-        title: 'Massage',
+        img: 'https://images.unsplash.com/photo-1601599561234-830227360341?w=800&q=80',
+        title: 'Same Day Delivery',
         cols: 2,
     },
     {
-        img: 'https://images.unsplash.com/photo-1519781542704-957ff19aa32e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-        title: 'Aroma Therapy',
+        img: 'https://images.unsplash.com/photo-1604719312563-8912e9223c6a?w=800&q=80',
+        title: 'Modern Pantry',
         rows: 2,
         cols: 2,
     },
@@ -35,8 +35,8 @@ const itemData = [
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
     return {
-        src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-        srcSet: `${image}?w=${size * cols}&h=${size * rows
+        src: `${image}&w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+        srcSet: `${image}&w=${size * cols}&h=${size * rows
             }&fit=crop&auto=format&dpr=2 2x`,
     };
 }
@@ -50,7 +50,7 @@ const GallerySection = () => {
                         GALLERY
                     </Typography>
                     <Typography variant="h3" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
-                        Inside Rhichik Ayurveda
+                        The OnlinePantry Experience
                     </Typography>
                 </Box>
                 <ImageList

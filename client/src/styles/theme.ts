@@ -105,6 +105,7 @@ export const theme = createTheme({
                     --pantry-white: #FFFFFF;
                     --pantry-cream: #FAFAF8;
                     --pantry-gray-100: #F5F5F3;
+                    --pantry-gray-200: #EBEBEA;
                     --pantry-gray-400: #9E9E9B;
                     --pantry-gray-800: #1A1A18;
                     --pantry-organic: #558B2F;

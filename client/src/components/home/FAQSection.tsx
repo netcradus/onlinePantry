@@ -3,24 +3,24 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
     {
-        question: "What is Ayurveda and how does it work?",
-        answer: "Ayurveda is a 5,000-year-old system of natural healing that originated in India. It works by balancing the three doshas (Vata, Pitta, Kapha) in the body through diet, lifestyle, herbs, and therapies to promote overall health and prevent disease."
+        question: "How long does delivery take?",
+        answer: "We offer same-day delivery across London for orders placed before 1 PM. Standard delivery typically takes 24-48 hours within the UK."
     },
     {
-        question: "Are Ayurvedic medicines safe?",
-        answer: "Yes, our Ayurvedic formulations are made from 100% natural herbs and are free from harmful chemicals. However, it is always recommended to consult with our qualified doctors before starting any medication."
+        question: "Are your products organic?",
+        answer: "Many of our products are certified organic. Look for the 'Organic' badge on product pages to identify them. We source directly from farms that prioritize sustainable and natural practices."
     },
     {
-        question: "What should I expect during my first consultation?",
-        answer: "During your first consultation, the doctor will conduct a detailed examination (Nadi Pariksha) to understand your body constitution (Prakriti) and identify any imbalances. Based on this, a personalized treatment plan including diet, lifestyle changes, and medicines will be prescribed."
+        question: "Is there a minimum order for free delivery?",
+        answer: "Yes, we offer free delivery on all orders over £15. For orders below this amount, a small delivery fee of £2.50 applies."
     },
     {
-        question: "How long does it take to see results?",
-        answer: "The time to see results varies depending on the severity and duration of the condition. While some acute conditions may resolve in a few days, chronic issues may take several weeks or months to show significant improvement. Patience and consistency are key in Ayurveda."
+        question: "Can I track my order in real-time?",
+        answer: "Absolutely! Once your order is dispatched, you'll receive a tracking link via SMS and Email. You can also view live updates in your 'Order History' section."
     },
     {
-        question: "Do you offer online consultations?",
-        answer: "Yes, we offer online video consultations for patients who cannot visit our clinic physically. You can book an appointment through our website."
+        question: "What is your return policy for fresh produce?",
+        answer: "We take pride in our quality. If any fresh item doesn't meet your expectations, please contact us within 4 hours of delivery, and we will issue a full refund or replacement, no questions asked."
     }
 ];
 

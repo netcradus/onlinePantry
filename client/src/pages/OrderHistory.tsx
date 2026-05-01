@@ -100,7 +100,7 @@ const OrderHistory = () => {
                                                     <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>{item.name}</Typography>
                                                     <Typography variant="caption" sx={{ color: 'var(--pantry-gray-400)', fontWeight: 600 }}>Qty: {item.quantity}</Typography>
                                                 </Box>
-                                                <Typography variant="h5" sx={{ fontWeight: 800, alignSelf: { xs: 'flex-end', sm: 'center' } }}>₹{(item.price * item.quantity).toFixed(2)}</Typography>
+                                                <Typography variant="h5" sx={{ fontWeight: 800, alignSelf: { xs: 'flex-end', sm: 'center' } }}>£{(item.price * item.quantity).toFixed(2)}</Typography>
                                             </Box>
                                         ))}
                                     </Stack>
@@ -111,7 +111,7 @@ const OrderHistory = () => {
                                         <Stack spacing={2}>
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                                 <Typography sx={{ color: 'var(--pantry-green-800)', opacity: 0.7, fontWeight: 500, fontSize: '14px' }}>Total Amount</Typography>
-                                                <Typography sx={{ fontWeight: 800, color: 'var(--pantry-green-800)' }}>₹{order.totalAmount.toFixed(2)}</Typography>
+                                                <Typography sx={{ fontWeight: 800, color: 'var(--pantry-green-800)' }}>£{order.totalAmount.toFixed(2)}</Typography>
                                             </Box>
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                                 <Typography sx={{ color: 'var(--pantry-green-800)', opacity: 0.7, fontWeight: 500, fontSize: '14px' }}>Fulfillment</Typography>

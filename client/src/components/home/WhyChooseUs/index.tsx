@@ -1,14 +1,14 @@
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import PersonIcon from '@mui/icons-material/Person';
+import LocalTruckIcon from '@mui/icons-material/LocalShipping';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const features = [
-    { title: 'Authentic Classical Ayurveda', icon: <VerifiedIcon fontSize="large" color="primary" />, desc: 'Strictly following ancient texts and traditional methods.' },
-    { title: 'Customized Treatment Plans', icon: <PersonIcon fontSize="large" color="primary" />, desc: 'Personalized therapies based on your unique body constitution (Prakriti).' },
-    { title: 'Herbal Medicines', icon: <LocalFloristIcon fontSize="large" color="primary" />, desc: '100% natural, pure, and efficacious Ayurvedic preparations.' },
-    { title: 'Holistic Approach', icon: <FavoriteIcon fontSize="large" color="primary" />, desc: 'Focusing on physical, mental, and spiritual well-being.' },
+    { title: 'Farm Fresh Quality', icon: <LocalFloristIcon fontSize="large" color="primary" />, desc: 'Directly sourced from local farms every morning for maximum nutrient retention.' },
+    { title: 'Same-Day Delivery', icon: <LocalTruckIcon fontSize="large" color="primary" />, desc: 'Order by 1 PM and receive your fresh groceries at your doorstep the very same day.' },
+    { title: 'Certified Organic', icon: <VerifiedIcon fontSize="large" color="primary" />, desc: 'Wide selection of 100% certified organic produce and pantry staples.' },
+    { title: 'Eco-Friendly Packaging', icon: <FavoriteIcon fontSize="large" color="primary" />, desc: 'We use sustainable, plastic-free packaging to protect our planet.' },
 ];
 
 const WhyChooseUs = () => {
@@ -16,7 +16,7 @@ const WhyChooseUs = () => {
         <Box sx={{ py: 10, bgcolor: '#fdfcf0' }}>
             <Container maxWidth="lg">
                 <Typography variant="h3" textAlign="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6 }}>
-                    Why Choose Rhichik Ayurveda
+                    Why Choose OnlinePantry
                 </Typography>
                 <Grid container spacing={4}>
                     {features.map((feature, index) => (

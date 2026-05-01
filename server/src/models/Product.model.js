@@ -96,6 +96,7 @@ const productSchema = new Schema(
 productSchema.index({ category: 1 });
 productSchema.index({ price: 1 });
 productSchema.index({ isFeatured: 1 });
+productSchema.index({ isActive: 1, category: 1, price: 1 }); // compound for search filter
 productSchema.index({ name: "text", brand: "text", tags: "text" }); // Text index for search
 
 export const Product = mongoose.models.Product || mongoose.model("Product", productSchema);

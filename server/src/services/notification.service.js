@@ -109,22 +109,22 @@ export const sendWhatsApp = async (to, body) => {
 export const NotificationService = {
     sendOrderPlaced: async (user, order) => {
         const subject = `Order Confirmation #${order._id}`;
-        const message = `Namaste ${user.firstName},\n\nThank you for your order! Your order #${order._id} has been placed successfully. Total Amount: ₹${order.totalAmount}.\n\nWe will notify you once it ships.\n\nOnline Pantry`;
+        const message = `Hello ${user.firstName},\n\nThank you for your order! Your order #${order._id} has been placed successfully. Total Amount: £${order.totalAmount}.\n\nWe will notify you once it ships.\n\nOnlinePantry`;
 
         await sendEmail(user.email, subject, message);
-        if (user.phone) await sendSMS(user.phone, `Order #${order._id} confirmed! Amount: ₹${order.totalAmount}. Thank you for choosing Online Pantry.`);
+        if (user.phone) await sendSMS(user.phone, `Order #${order._id} confirmed! Amount: £${order.totalAmount}. Thank you for choosing OnlinePantry.`);
     },
 
     sendPaymentSuccess: async (user, orderId, amount) => {
         const subject = `Payment Received for Order #${orderId}`;
-        const message = `Namaste ${user.firstName},\n\nWe have received your payment of ₹${amount} for Order #${orderId}. Your order is now being processed.`;
+        const message = `Hello ${user.firstName},\n\nWe have received your payment of £${amount} for Order #${orderId}. Your order is now being processed.`;
 
         await sendEmail(user.email, subject, message);
     },
 
     sendPaymentFailed: async (user, orderId) => {
         const subject = `Payment Failed for Order #${orderId}`;
-        const message = `Namaste ${user.firstName},\n\nPayment for Order #${orderId} failed. Please try again or contact support.`;
+        const message = `Hello ${user.firstName},\n\nPayment for Order #${orderId} failed. Please try again or contact support.`;
 
         await sendEmail(user.email, subject, message);
     },
@@ -133,7 +133,7 @@ export const NotificationService = {
         if (!user || !user.email) return;
 
         const subject = `Order #${order._id} Update: ${status.toUpperCase()}`;
-        const message = `Namaste ${user.firstName},\n\nYour order #${order._id} is now ${status}. \n\nTrack your order on our website.\n\nOnline Pantry`;
+        const message = `Hello ${user.firstName},\n\nYour order #${order._id} is now ${status}. \n\nTrack your order on our website.\n\nOnlinePantry`;
 
         try {
             await sendEmail(user.email, subject, message);
@@ -178,7 +178,7 @@ export const NotificationService = {
 
         if (sendSms) {
             const formattedDate = dispatchDate ? new Date(dispatchDate).toLocaleDateString('en-GB') : 'soon';
-            const smsBody = `Online Pantry: Your order #${order._id.toString().slice(-6).toUpperCase()} is confirmed. Total: ₹${order.totalAmount}. Dispatch by: ${formattedDate}. We will notify you once shipped.`;
+            const smsBody = `OnlinePantry: Your order #${order._id.toString().slice(-6).toUpperCase()} is confirmed. Total: £${order.totalAmount}. Dispatch by: ${formattedDate}. We will notify you once shipped.`;
             results.sms = await sendSMS(phone, smsBody);
         }
 

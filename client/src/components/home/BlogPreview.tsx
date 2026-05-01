@@ -4,30 +4,30 @@ import { Calendar, User, ArrowRight } from 'lucide-react';
 const blogs = [
     {
         id: 1,
-        title: "5 Ayurvedic Tips for Better Sleep",
-        author: "Dr. Rhichik",
-        date: "Oct 12, 2023",
-        category: "Lifestyle",
-        image: "https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-        excerpt: "Discover how ancient Ayurvedic practices can help you achieve deep and restorative sleep naturally."
+        title: "How to Choose the Freshest Seasonal Produce",
+        author: "Pantry Expert",
+        date: "May 12, 2026",
+        category: "Tips",
+        image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+        excerpt: "Learn the secrets to picking the most vibrant fruits and vegetables every time you shop."
     },
     {
         id: 2,
-        title: "Understanding Your Dosha Type",
-        author: "Dr. Rhichik",
-        date: "Sep 28, 2023",
-        category: "Education",
-        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-        excerpt: "Learn about Vata, Pitta, and Kapha doshas and how to balance them for optimal health."
+        title: "The Benefits of Support Local Organic Farms",
+        author: "Sustainability Team",
+        date: "May 08, 2026",
+        category: "Organic",
+        image: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+        excerpt: "Why choosing locally sourced organic produce is better for you and the planet."
     },
     {
         id: 3,
-        title: "Benefits of Copper Water",
-        author: "Dr. Rhichik",
-        date: "Sep 15, 2023",
-        category: "Nutrition",
-        image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=684&q=80",
-        excerpt: "Drinking water stored in copper vessels can have amazing health benefits. Here is why."
+        title: "5 Quick & Healthy Recipes for Busy Weeknights",
+        author: "Chef Emma",
+        date: "May 05, 2026",
+        category: "Recipes",
+        image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+        excerpt: "Delicious and nutritious meals you can prepare in under 20 minutes using pantry staples."
     }
 ];
 
@@ -41,7 +41,7 @@ const BlogPreview = () => {
                             LATEST ARTICLES
                         </Typography>
                         <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main' }}>
-                            Health Insights
+                            Pantry Insights
                         </Typography>
                     </Box>
                     <Button variant="outlined" color="primary" sx={{ borderRadius: 2 }}>

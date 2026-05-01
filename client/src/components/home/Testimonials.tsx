@@ -4,26 +4,26 @@ import { Quote } from 'lucide-react';
 const testimonials = [
     {
         id: 1,
-        name: "Rajesh Kumar",
-        location: "Mumbai",
+        name: "James Wilson",
+        location: "Greenwich, London",
         rating: 5,
-        text: "The Panchakarma treatment at Rhichik Ayurveda was a life-changing experience. My chronic back pain has significantly reduced.",
+        text: "The same-day delivery is a lifesaver! I ordered my groceries at 11 AM and they were at my door by 4 PM. The produce was incredibly fresh.",
         image: "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
         id: 2,
-        name: "Sita Sharma",
-        location: "Pune",
+        name: "Sarah Thompson",
+        location: "Richmond, London",
         rating: 5,
-        text: "Dr. Rhichik is very knowledgeable and patient. The medicines prescribed were effective and had no side effects.",
+        text: "Finally found a reliable place for organic vegetables. The quality of the leafy greens is better than any supermarket I've tried.",
         image: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     {
         id: 3,
-        name: "Amit Patel",
-        location: "Ahmedabad",
+        name: "David Chen",
+        location: "Canary Wharf, London",
         rating: 4,
-        text: "Great ambiance and authentic treatments. Highly recommend their immunity boosting program.",
+        text: "Great selection of dairy and bakery items. The sustainable packaging is a huge plus for me. Highly recommend OnlinePantry!",
         image: "https://randomuser.me/api/portraits/men/86.jpg"
     }
 ];
@@ -37,7 +37,7 @@ const Testimonials = () => {
                         TESTIMONIALS
                     </Typography>
                     <Typography variant="h3" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
-                        Stories of Healing
+                        Customer Stories
                     </Typography>
                 </Box>
 

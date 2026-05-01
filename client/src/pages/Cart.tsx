@@ -17,7 +17,7 @@ const Cart = () => {
 
     const cartItems = cartData?.data?.items || [];
     const subtotal = cartItems.reduce((sum: number, item: any) => sum + (item.product.price * item.quantity), 0);
-    const deliveryFee = subtotal > 499 ? 0 : 49;
+    const deliveryFee = subtotal >= 15 ? 0 : 2.50;
     const total = subtotal + deliveryFee;
 
     const handleUpdateQuantity = async (productId: string, newQuantity: number) => {
@@ -130,7 +130,7 @@ const Cart = () => {
                                         </Grid>
 
                                         <Grid item xs={6} sm={2} sx={{ textAlign: 'right' }}>
-                                            <Typography variant="h5" sx={{ fontWeight: 800, mb: 1 }}>₹{(item.product.price * item.quantity).toFixed(2)}</Typography>
+                                            <Typography variant="h5" sx={{ fontWeight: 800, mb: 1 }}>£{(item.product.price * item.quantity).toFixed(2)}</Typography>
                                             <IconButton 
                                                 size="small"
                                                 sx={{ color: 'var(--pantry-gray-400)', '&:hover': { color: 'var(--pantry-sale)' } }} 
@@ -172,24 +172,24 @@ const Cart = () => {
                             <Stack spacing={2} sx={{ mb: 4 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography sx={{ color: 'var(--pantry-gray-400)', fontWeight: 500 }}>Subtotal</Typography>
-                                    <Typography sx={{ fontWeight: 700 }}>₹{subtotal.toFixed(2)}</Typography>
+                                    <Typography sx={{ fontWeight: 700 }}>£{subtotal.toFixed(2)}</Typography>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography sx={{ color: 'var(--pantry-gray-400)', fontWeight: 500 }}>Delivery Fee</Typography>
                                     <Typography sx={{ fontWeight: 700, color: deliveryFee === 0 ? 'var(--pantry-green-600)' : 'inherit' }}>
-                                        {deliveryFee === 0 ? 'FREE' : `₹${deliveryFee.toFixed(2)}`}
+                                        {deliveryFee === 0 ? 'FREE' : `£${deliveryFee.toFixed(2)}`}
                                     </Typography>
                                 </Box>
                                 {deliveryFee > 0 && (
                                     <Typography variant="caption" sx={{ color: 'var(--pantry-green-600)', fontWeight: 600 }}>
-                                        Add ₹{500 - subtotal} more for FREE delivery
+                                        Add £{(15 - subtotal).toFixed(2)} more for FREE delivery
                                     </Typography>
                                 )}
                                 <Divider sx={{ my: 1 }} />
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Typography variant="h4" sx={{ fontWeight: 800 }}>Total</Typography>
                                     <Typography variant="h3" sx={{ fontWeight: 800, color: 'var(--pantry-green-600)' }}>
-                                        ₹{total.toFixed(2)}
+                                        £{total.toFixed(2)}
                                     </Typography>
                                 </Box>
                             </Stack>

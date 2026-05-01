@@ -48,11 +48,11 @@ const Home = () => {
     const categories = [
         { name: 'Fruits', image: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&q=80', query: 'fruits' },
         { name: 'Vegetables', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80', query: 'vegetables' },
+        { name: 'Meat', image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&q=80', query: 'meat' },
         { name: 'Dairy', image: 'https://images.unsplash.com/photo-1563636619-e9107daaf182?w=400&q=80', query: 'dairy' },
         { name: 'Bakery', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', query: 'bakery' },
         { name: 'Frozen', image: 'https://images.unsplash.com/photo-1584263343327-4479f824cca6?w=400&q=80', query: 'frozen' },
-        { name: 'Drinks', image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400&q=80', query: 'drinks' },
-        { name: 'Snacks', image: 'https://images.unsplash.com/photo-1534083222119-2816123f997c?w=400&q=80', query: 'snacks' },
+        { name: 'Drinks', image: 'https://images.unsplash.com/photo-1613478223719-2ab80260f45c?w=400&q=80', query: 'drinks' },
         { name: 'Organic', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80', query: 'organic' }
     ];
 
@@ -469,7 +469,7 @@ const Home = () => {
                 <Container maxWidth="xl">
                     <Grid container spacing={4}>
                         {[
-                            { icon: <Truck size={28} />, title: 'Free Delivery', sub: 'On orders above ₹499' },
+                            { icon: <Truck size={28} />, title: 'Free Delivery', sub: 'On orders above £15' },
                             { icon: <Leaf size={28} />, title: '100% Organic', sub: 'Sourced from certified farms' },
                             { icon: <ShieldCheck size={28} />, title: 'Fresh Guarantee', sub: 'Or your money back' },
                             { icon: <Star size={28} />, title: 'Secure Checkout', sub: '256-bit encrypted' }

@@ -4,80 +4,122 @@ import ApiResponse from "../utils/helpers/apiResponse.js";
 import asyncHandler from "../utils/helpers/asyncHandler.js";
 
 const searchProducts = asyncHandler(async (req, res) => {
-    const { 
-        q, 
-        category, 
-        min, 
-        max, 
-        sort = "relevance", 
-        isOrganic, 
-        page = 1, 
-        limit = 20 
+    const {
+        q,
+        category,
+        min,
+        max,
+        sort = "relevance",
+        isOrganic,
+        page = 1,
+        limit = 20
     } = req.query;
 
-    const skip = (page - 1) * limit;
+    const pageNum = Math.max(1, parseInt(page, 10));
+    const limitNum = Math.min(50, Math.max(1, parseInt(limit, 10)));
+    const skip = (pageNum - 1) * limitNum;
 
-    // Build Query
-    let query = { isActive: true };
-    
+    // Build base match
+    const matchStage = { isActive: true };
+
     if (q) {
-        query.$text = { $search: q };
-    }
-
-    if (category) {
-        const cat = await Category.findOne({ 
-            $or: [
-                { _id: category.match(/^[0-9a-fA-F]{24}$/) ? category : null }, 
-                { slug: category.toLowerCase() }
-            ] 
-        });
-        if (cat) query.category = cat._id;
-    }
-
-    if (min !== undefined || max !== undefined) {
-        query.price = {};
-        if (min !== undefined && min !== '') query.price.$gte = parseFloat(min);
-        if (max !== undefined && max !== '') query.price.$lte = parseFloat(max);
-        
-        // Remove empty price query if neither min nor max were valid numbers
-        if (Object.keys(query.price).length === 0) delete query.price;
+        matchStage.$text = { $search: q };
     }
 
     if (isOrganic === "true") {
-        query.isOrganic = true;
+        matchStage.isOrganic = true;
     }
 
-    // Build Sort
-    let sortOptions = {};
+    if (min !== undefined || max !== undefined) {
+        matchStage.price = {};
+        if (min !== undefined && min !== '') matchStage.price.$gte = parseFloat(min);
+        if (max !== undefined && max !== '') matchStage.price.$lte = parseFloat(max);
+        if (Object.keys(matchStage.price).length === 0) delete matchStage.price;
+    }
+
+    // Resolve category slug → ObjectId in one query (only when needed)
+    if (category) {
+        const isObjectId = /^[0-9a-fA-F]{24}$/.test(category);
+        const cat = isObjectId
+            ? await Category.findById(category).select("_id").lean()
+            : await Category.findOne({ slug: category.toLowerCase() }).select("_id").lean();
+        if (cat) {
+            matchStage.category = cat._id;
+        } else {
+            // Unknown category → return empty immediately, no DB scan needed
+            return res.status(200).json(new ApiResponse(200, {
+                data: [],
+                total: 0,
+                page: pageNum,
+                pages: 0,
+                facets: { categories: [], priceRange: { min: 0, max: 100 }, dietary: ["Organic", "Vegan", "Gluten-free"] }
+            }, "Search results fetched successfully"));
+        }
+    }
+
+    // Build sort
+    let sortStage = { createdAt: -1 };
     if (sort === "relevance" && q) {
-        sortOptions.score = { $meta: "textScore" };
+        sortStage = { score: { $meta: "textScore" } };
     } else if (sort === "price_asc") {
-        sortOptions.price = 1;
+        sortStage = { price: 1 };
     } else if (sort === "price_desc") {
-        sortOptions.price = -1;
+        sortStage = { price: -1 };
     } else if (sort === "newest") {
-        sortOptions.createdAt = -1;
+        sortStage = { createdAt: -1 };
     } else if (sort === "rating") {
-        sortOptions.averageRating = -1;
+        sortStage = { averageRating: -1 };
     }
 
-    // Execute Search
-    const products = await Product.find(query, q ? { score: { $meta: "textScore" } } : {})
-        .sort(sortOptions)
-        .skip(skip)
-        .limit(parseInt(limit))
-        .populate("category", "name slug");
+    // Single aggregation: products + count + categories in one round-trip
+    const [result, categories] = await Promise.all([
+        Product.aggregate([
+            { $match: matchStage },
+            ...(q ? [{ $addFields: { score: { $meta: "textScore" } } }] : []),
+            { $sort: sortStage },
+            {
+                $facet: {
+                    data: [
+                        { $skip: skip },
+                        { $limit: limitNum },
+                        {
+                            $lookup: {
+                                from: "categories",
+                                localField: "category",
+                                foreignField: "_id",
+                                as: "category",
+                                pipeline: [{ $project: { name: 1, slug: 1 } }]
+                            }
+                        },
+                        { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+                        // Only return fields the frontend needs
+                        {
+                            $project: {
+                                name: 1, slug: 1, brand: 1, price: 1, discountPrice: 1,
+                                images: { $slice: ["$images", 1] }, // only first image
+                                weight: 1, isOrganic: 1, isFeatured: 1, stock: 1,
+                                category: 1, averageRating: 1,
+                            }
+                        }
+                    ],
+                    total: [{ $count: "count" }]
+                }
+            }
+        ]).allowDiskUse(false),
+        Category.find({ isVisible: true }).select("name slug").lean(),
+    ]);
 
-    const total = await Product.countDocuments(query);
+    const data = result[0]?.data || [];
+    const total = result[0]?.total?.[0]?.count || 0;
 
-    // Get Facets
-    const categories = await Category.find({ isVisible: true }).select("name slug");
+    // Light HTTP cache: 60 seconds for unauthenticated catalog browsing
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
 
     return res.status(200).json(new ApiResponse(200, {
-        data: products,
+        data,
         total,
-        page: parseInt(page),
-        pages: Math.ceil(total / limit),
+        page: pageNum,
+        pages: Math.ceil(total / limitNum),
         facets: {
             categories,
             priceRange: { min: 0, max: 100 },

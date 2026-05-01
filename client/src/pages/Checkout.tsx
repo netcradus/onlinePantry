@@ -23,16 +23,15 @@ const Checkout = () => {
         city: '',
         state: '',
         postcode: '',
-        country: 'India',
+        country: 'United Kingdom',
         phone: user?.phone || '',
     });
     const [paymentMethod, setPaymentMethod] = useState('card');
 
     const cartItems = cartData?.data?.items || [];
     const subtotal = cartItems.reduce((sum: number, item: any) => sum + (item.product.price * item.quantity), 0);
-    const deliveryFee = subtotal > 499 ? 0 : 49;
-    const loyaltyDiscount = subtotal > 1000 ? subtotal * 0.05 : 0;
-    const total = subtotal + deliveryFee - loyaltyDiscount;
+    const deliveryFee = subtotal >= 15 ? 0 : 2.50;
+    const total = subtotal + deliveryFee;
 
     useEffect(() => {
         if (!isCartLoading && cartItems.length === 0) {
@@ -232,7 +231,7 @@ const Checkout = () => {
                                     <Stack direction="row" spacing={2} sx={{ mt: 6 }}>
                                         <PantryButton variant="ghost" onClick={handleBack} sx={{ fontWeight: 700 }}>&larr; Back</PantryButton>
                                         <PantryButton variant="primary" onClick={handlePlaceOrder} loading={isCreating} sx={{ borderRadius: '24px', px: 6, flexGrow: 1 }}>
-                                            Place Order • ₹{total.toFixed(2)}
+                                            Place Order • £{total.toFixed(2)}
                                         </PantryButton>
                                     </Stack>
                                 </Paper>
@@ -251,7 +250,7 @@ const Checkout = () => {
                                             <Typography variant="body2" sx={{ fontWeight: 700 }}>{item.product.name}</Typography>
                                             <Typography variant="caption" sx={{ color: 'var(--pantry-gray-400)' }}>Qty: {item.quantity}</Typography>
                                         </Box>
-                                        <Typography variant="body2" sx={{ fontWeight: 800 }}>₹{(item.product.price * item.quantity).toFixed(2)}</Typography>
+                                        <Typography variant="body2" sx={{ fontWeight: 800 }}>£{(item.product.price * item.quantity).toFixed(2)}</Typography>
                                     </Box>
                                 ))}
                             </Stack>
@@ -259,24 +258,18 @@ const Checkout = () => {
                             <Stack spacing={2} sx={{ mb: 4 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography sx={{ color: 'var(--pantry-gray-400)', fontWeight: 500 }}>Subtotal</Typography>
-                                    <Typography sx={{ fontWeight: 700 }}>₹{subtotal.toFixed(2)}</Typography>
+                                    <Typography sx={{ fontWeight: 700 }}>£{subtotal.toFixed(2)}</Typography>
                                 </Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography sx={{ color: 'var(--pantry-gray-400)', fontWeight: 500 }}>Delivery</Typography>
                                     <Typography sx={{ fontWeight: 700, color: deliveryFee === 0 ? 'var(--pantry-green-600)' : 'inherit' }}>
-                                        {deliveryFee === 0 ? 'FREE' : `₹${deliveryFee.toFixed(2)}`}
+                                        {deliveryFee === 0 ? 'FREE' : `£${deliveryFee.toFixed(2)}`}
                                     </Typography>
                                 </Box>
-                                {loyaltyDiscount > 0 && (
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Typography sx={{ color: 'var(--pantry-green-600)', fontWeight: 600 }}>Loyalty Discount (5%)</Typography>
-                                        <Typography sx={{ fontWeight: 800, color: 'var(--pantry-green-600)' }}>-₹{loyaltyDiscount.toFixed(2)}</Typography>
-                                    </Box>
-                                )}
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 2 }}>
                                     <Typography variant="h4" sx={{ fontWeight: 800 }}>Total</Typography>
                                     <Typography variant="h3" sx={{ fontWeight: 800, color: 'var(--pantry-green-600)' }}>
-                                        ₹{total.toFixed(2)}
+                                        £{total.toFixed(2)}
                                     </Typography>
                                 </Box>
                             </Stack>
